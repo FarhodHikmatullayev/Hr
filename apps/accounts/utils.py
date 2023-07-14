@@ -1,7 +1,7 @@
 
 def avatar_path(instance, filename):
-    return f'{instance.email}/avatar/{filename}'
+    return f'accounts/{instance.email}/avatar/{filename}'
 
 
 def cv_path(instance, filename):
-    return f'{instance.email}/cv/{filename}'
+    return f'accounts/{instance.email}/cv/{filename}'

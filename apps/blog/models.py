@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import reverse
 from django.db.models.signals import pre_save, post_save
 from django.utils.text import slugify
 from ckeditor.fields import RichTextField
@@ -33,6 +34,15 @@ class Blog(Base):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
     image = models.ImageField(upload_to='blogs/')
     description = RichTextField()
+
+    @property
+    def full_url(self):
+        return reverse('blog:detail', kwargs={
+            'year': self.created_date.year,
+            'month': self.created_date.month,
+            'day': self.created_date.day,
+            'slug': self.slug,
+        })
 
     def __str__(self):
         return self.title
